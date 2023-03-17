@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+@layer base {
+  button {
+    @apply border border-blue-400;
+    @apply rounded;
+    @apply font-medium;
+    @apply p-4 py-3;
+    @apply bg-blue-500;
+    @apply text-white;
+    @apply hover:bg-blue-400;
+    @apply active:bg-blue-600;
+    @apply disabled:bg-zinc-300 disabled:text-zinc-600 disabled:border-zinc-300;
+  }
+
+  button.button-outline {
+    @apply border border-blue-400;
+    @apply bg-transparent;
+    @apply text-blue-800;
+    @apply hover:bg-blue-50;
+    @apply active:bg-blue-100;
+    @apply disabled:bg-zinc-300 disabled:text-zinc-500 disabled:border-zinc-400;
+    
+  }
+/* 
+  input[type="text"] {
+    @apply p-2;
+    @apply border;
+    @apply rounded;
+    @apply outline-transparent;
+    @apply focus:ring;
+  } */
+
+  h1 {
+    @apply text-4xl;
+    @apply font-medium;
+  }
+
+  h2 {
+    @apply text-2xl;
+    @apply font-medium;
+  }
+}
+
+@layer components {
+  .form-input {
+    @apply text-2xl border-b-2 border-zinc-500 p-4 outline-transparent block bg-transparent;
+    @apply focus:bg-zinc-100;
+  }
+}
