@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChangeEventHandler, useState } from "react";
 import { FormData, FormField, FormType } from "../types/FormField";
 import InputNumber from "./InputNumber";
-import InputText from "./InputText";
+import FormInputText from "./FormInputText";
 import ProgressBar from "./ProgressBar";
 
 type Props = {
@@ -61,7 +61,7 @@ function Form(props: Props) {
                             <>
                                 {
                                     field.type === FormType.text || !field.type ?
-                                        <InputText placeholder={field.label} initialValue={data[field.name]} key={`${idx}${field.name}`} autoFocus onChange={createChangeHandler(field.name)}></InputText> :
+                                        <FormInputText placeholder={field.label} initialValue={data[field.name]} key={`${idx}${field.name}`} autoFocus onChange={createChangeHandler(field.name)}></FormInputText> :
                                         field.type === FormType.number ?
                                             <InputNumber placeholder={field.label} initialValue={data[field.name]} key={`${idx}${field.name}`} autoFocus onChange={createChangeHandler(field.name)}></InputNumber> :
                                             ''

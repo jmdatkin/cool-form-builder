@@ -12,9 +12,9 @@ export type FormField = {
     extraProps?: any[]
 };
 
-export type FormPage = {
+export type FormPageData = {
     title: string,
     fields: FormField[]
 };
 
-export type FormData = FormPage[];
+export type FormData = FormPageData[];

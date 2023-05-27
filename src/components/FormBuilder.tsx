@@ -2,6 +2,7 @@ import { useState } from "react";
 import useBus from "use-bus";
 import { FormField } from "../types/FormField";
 import FormBuilderPage from "./FormBuilderPage";
+import { AnimatePresence, motion } from 'framer-motion';
 
 type Props = {
     onFinish: Function
@@ -25,6 +26,15 @@ function FormBuilder(props: Props) {
             }));
         }, [pages]
     );
+
+    const createPageDeleteSelfFunction = function (idx: number) {
+        return () => {
+            console.log(idx);
+            setPages((prev: any) => {
+                return prev.toSpliced(idx,1);
+            });
+        };
+    };
 
     // const createSetPageTitleCallback = function (idx: number) {
     //     return (title: string) => {
@@ -77,7 +87,7 @@ function FormBuilder(props: Props) {
         props.onFinish(pages);
     };
 
-    const viewSample = function() {
+    const viewSample = function () {
         props.onFinish(false);
     }
 
@@ -87,22 +97,30 @@ function FormBuilder(props: Props) {
                 <h1>Form Builder</h1>
             </div>
             <div className="flex flex-col max-w-[56rem] w-full mx-auto">
-                <div className="flex flex-col w-full [&>*]:border-b">
-                    {pages.map((page, idx) => {
-                        return (
-                            <div key={idx} className="flex flex-col">
-                                <div className="">
-                                    <FormBuilderPage
-                                        index={idx}
-                                        // setTitle={createSetPageTitleCallback(idx)}
-                                        // setLabel={createSetPageFieldLabelCallback(idx,)}
-                                        // setLabel={createSetPageFieldLabelCallback(idx,page.name)}
-                                        data={page}></FormBuilderPage>
-                                </div>
-                            </div>
-                        )
-                    })}
+                <div className="flex flex-col w-full space-y-2 py-4">
+                    <AnimatePresence>
+                        {pages.map((page, idx) => {
+                            return (
+                                <motion.div key={idx} className="flex flex-col relative"
+                                    initial={{ opacity: 0, top: 15 }}
+                                    animate={{ opacity: 1, top: 0 }}
+                                    exit={{ opacity: 0 }}
+                                >
+                                    <div className="">
+                                        <FormBuilderPage
+                                            index={idx}
+                                            deleteSelf={createPageDeleteSelfFunction(idx)}
+                                            // setTitle={createSetPageTitleCallback(idx)}
+                                            // setLabel={createSetPageFieldLabelCallback(idx,)}
+                                            // setLabel={createSetPageFieldLabelCallback(idx,page.name)}
+                                            data={page}></FormBuilderPage>
+                                    </div>
+                                </motion.div>
+                            )
+                        })}
+                    </AnimatePresence>
                 </div>
+                {/* </div> */}
                 <div className="p-6 flex flex-col">
                     <button onClick={addPage}>+ Page</button>
                     <button onClick={submit}>Finish</button>
@@ -110,7 +128,7 @@ function FormBuilder(props: Props) {
                     <button onClick={viewSample}>View Sample</button>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 

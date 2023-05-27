@@ -2,11 +2,11 @@ import { MutableRefObject, useRef, useState } from 'react'
 import './App.css'
 import Form from './components/Form'
 import FormBuilder from './components/FormBuilder'
-import { FormPage, FormType } from './types/FormField'
+import { FormPageData, FormType } from './types/FormField'
 
 function App() {
 
-  const formData: MutableRefObject<FormPage[]> = useRef(
+  const formData: MutableRefObject<FormPageData[]> = useRef(
     [
       {
         title: "Welcome! To start, tell us your first name.",
